@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,6 +78,13 @@ span.psw {
     width: 100%;
   }
 }
+.container1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+}
 </style>
 </head>
 <body>
@@ -97,10 +105,11 @@ span.psw {
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
   </div>
-
   <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
+    <div class="container1">
+        <span class="psw">Don't have an account? <a href="http://localhost:8080/tutorial/register">Register</a></span>
+        <span class="psw">Forgot <a href="http://localhost:8080/tutorial/forgot">password?</a></span>
+    </div>
   </div>
 </form>
 </body>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +20,8 @@ import services.impl.UserServiceImpl;
 @WebServlet(urlPatterns = "/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	public static final String SESSION_USERNAME = "username";
+	public static final String COOKIE_REMEMBER = "username";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -34,7 +37,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/login.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
@@ -67,12 +70,21 @@ public class LoginController extends HttpServlet {
 		if (user != null) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("account", user);
+			if (isRememberMe) {
+				saveRemeberMe(response, username);
+			}
 			response.sendRedirect(request.getContextPath() + "/waiting");
 		} else {
 			alertMsg = "Tài khoản hoặc mật khẩu không đúng";
 			request.setAttribute("alert", alertMsg);
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 		}
+	}
+
+	private void saveRemeberMe(HttpServletResponse response, String username) {
+		Cookie cookie = new Cookie(COOKIE_REMEMBER, username);
+		cookie.setMaxAge(30 * 60);
+		response.addCookie(cookie);
 	}
 }
 //logout bao gồm xóa session, cookie quay lại trang đăng nhập

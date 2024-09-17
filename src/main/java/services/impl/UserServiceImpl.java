@@ -23,12 +23,32 @@ public class UserServiceImpl implements IUserService {
 		return null;
 	}
 
-	public static void main(String[] args) {
-		try {
-			IUserService userService = new UserServiceImpl();
-			System.out.println(userService.login("nhat", "123"));
-		} catch (Exception ex) {
-			ex.printStackTrace();
+	@Override
+	public boolean register(String email, String password, String username, String fullname, String phone) {
+		if (userDao.checkExistUsername(username)) {
+			return false;
 		}
+		long millis = System.currentTimeMillis();
+		java.sql.Date date = new java.sql.Date(millis);
+		userDao.insert(new UserModel(username, email, password, fullname, null, 1, phone, date));
+		return true;
+	}
+
+	public boolean checkExistEmail(String email) {
+		return userDao.checkExistEmail(email);
+	}
+
+	public boolean checkExistUsername(String username) {
+		return userDao.checkExistUsername(username);
+	}
+
+	@Override
+	public boolean checkExistPhone(String phone) {
+		return userDao.checkExistPhone(phone);
+	}
+
+	@Override
+	public void insert(UserModel user) {
+		userDao.insert(user);
 	}
 }
