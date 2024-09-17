@@ -120,4 +120,17 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return duplicate;
 	}
+
+	@Override
+	public void updatePassword(String username, String password) {
+		String query = "update Users set password = ? where username = ?";
+		try {
+			conn = new DBConnectSQL().getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, password);
+			ps.setString(2, username);
+			ps.executeUpdate();
+		} catch (Exception ex) {
+		}
+	}
 }

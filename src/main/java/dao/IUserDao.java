@@ -13,4 +13,6 @@ public interface IUserDao {
 
 	boolean checkExistPhone(String phone);
 
+	void updatePassword(String username, String password);
+
 }

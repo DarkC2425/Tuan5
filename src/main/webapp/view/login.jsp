@@ -107,8 +107,8 @@ span.psw {
   </div>
   <div class="container" style="background-color:#f1f1f1">
     <div class="container1">
-        <span class="psw">Don't have an account? <a href="http://localhost:8080/tutorial/register">Register</a></span>
-        <span class="psw">Forgot <a href="http://localhost:8080/tutorial/forgot">password?</a></span>
+        <span class="psw">Don't have an account? <a href="/tutorial/register">Register</a></span>
+        <span class="psw">Forgot <a href="/tutorial/forgotPassword">password?</a></span>
     </div>
   </div>
 </form>
