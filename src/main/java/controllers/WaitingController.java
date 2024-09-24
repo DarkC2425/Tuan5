@@ -29,6 +29,7 @@ public class WaitingController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -37,11 +38,11 @@ public class WaitingController extends HttpServlet {
 			UserModel userModel = (UserModel) session.getAttribute("account");
 			request.setAttribute("username", userModel.getUsername());
 			if (userModel.getRoleid() == 1) {
-				response.sendRedirect(request.getContextPath() + "/admin/home");
+				response.sendRedirect(request.getContextPath() + "/home");
 			} else if (userModel.getRoleid() == 2) {
 				response.sendRedirect(request.getContextPath() + "/manager/home");
 			} else {
-				response.sendRedirect(request.getContextPath() + "/home");
+				response.sendRedirect(request.getContextPath() + "/admin/home");
 			}
 		} else {
 			response.sendRedirect(request.getContextPath() + "/login");
@@ -52,6 +53,7 @@ public class WaitingController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub

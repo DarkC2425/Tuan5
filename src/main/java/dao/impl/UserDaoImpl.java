@@ -122,13 +122,13 @@ public class UserDaoImpl implements IUserDao {
 	}
 
 	@Override
-	public void updatePassword(String username, String password) {
-		String query = "update Users set password = ? where username = ?";
+	public void updatePassword(String email, String password) {
+		String query = "update Users set password = ? where email = ?";
 		try {
 			conn = new DBConnectSQL().getConnection();
 			ps = conn.prepareStatement(query);
 			ps.setString(1, password);
-			ps.setString(2, username);
+			ps.setString(2, email);
 			ps.executeUpdate();
 		} catch (Exception ex) {
 		}

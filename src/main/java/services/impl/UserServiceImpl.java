@@ -34,10 +34,12 @@ public class UserServiceImpl implements IUserService {
 		return true;
 	}
 
+	@Override
 	public boolean checkExistEmail(String email) {
 		return userDao.checkExistEmail(email);
 	}
 
+	@Override
 	public boolean checkExistUsername(String username) {
 		return userDao.checkExistUsername(username);
 	}
@@ -53,7 +55,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public void updatePassword(String username, String password) {
-		userDao.updatePassword(username, password);
+	public void updatePassword(String email, String password) {
+		userDao.updatePassword(email, password);
 	}
 }

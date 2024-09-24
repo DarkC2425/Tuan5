@@ -18,7 +18,7 @@ import services.impl.UserServiceImpl;
 @WebServlet(urlPatterns = "/register")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String REGISTER = "/view/register.jsp";
+	public static final String REGISTER = "/views/register.jsp";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -32,11 +32,12 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("username") != null) {
-			response.sendRedirect(request.getContextPath() + "/admin/home");
+			response.sendRedirect(request.getContextPath() + "/home");
 			return;
 		}
 		Cookie[] cookies = request.getCookies();
@@ -45,7 +46,7 @@ public class RegisterController extends HttpServlet {
 				if (cookie.getName().equals("username")) {
 					session = request.getSession(true);
 					session.setAttribute("username", cookie.getValue());
-					response.sendRedirect(request.getContextPath() + "/admin/home");
+					response.sendRedirect(request.getContextPath() + "/home");
 					return;
 				}
 			}
@@ -57,6 +58,7 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");

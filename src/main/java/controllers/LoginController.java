@@ -35,9 +35,10 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/login.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/login.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
@@ -45,6 +46,7 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -77,7 +79,7 @@ public class LoginController extends HttpServlet {
 		} else {
 			alertMsg = "Tài khoản hoặc mật khẩu không đúng";
 			request.setAttribute("alert", alertMsg);
-			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 		}
 	}
 

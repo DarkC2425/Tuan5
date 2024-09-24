@@ -29,6 +29,7 @@ public class LogoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -39,15 +40,15 @@ public class LogoutController extends HttpServlet {
 		cookies = request.getCookies();
 		// Set response content type
 		if (cookies != null) {
-			for (int i = 0; i < cookies.length; i++) {
-				cookie = cookies[i];
+			for (Cookie element : cookies) {
+				cookie = element;
 				if ((cookie.getName()).compareTo("username") == 0) {
 					// delete cookie
 					cookie.setMaxAge(0);
 					response.addCookie(cookie);
 				}
 			}
-			response.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(request.getContextPath() + "/home");
 		}
 	}
 
@@ -55,6 +56,7 @@ public class LogoutController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub

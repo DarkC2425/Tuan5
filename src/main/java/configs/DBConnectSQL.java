@@ -15,8 +15,9 @@ public class DBConnectSQL {
 
 	public Connection getConnection() throws Exception {
 		String url = "jdbc:sqlserver://" + serverName + "\\" + instance + ":" + portNumber + ";databaseName=" + dbName;
-		if (instance == null || instance.trim().isEmpty())
+		if (instance == null || instance.trim().isEmpty()) {
 			url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
+		}
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		return DriverManager.getConnection(url, userID, password);
 	}
